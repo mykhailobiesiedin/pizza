@@ -1,9 +1,10 @@
-package com.example.pizza.domain.entity;
+package com.example.pizza.domain.authorization;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "authority")
@@ -12,10 +13,26 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long id;
+    private long id;
 
     @Column(name = "name")
-    public String name;
+    private String name;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = @JoinColumn(name = "authority_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> users;
+
+    public Set<User> getEmployees() {
+        return users;
+    }
+
+    public void setEmployees(Set<User> users) {
+        this.users = users;
+    }
 
     public Role() {
     }

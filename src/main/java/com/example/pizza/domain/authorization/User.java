@@ -1,4 +1,4 @@
-package com.example.pizza.domain.entity;
+package com.example.pizza.domain.authorization;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -10,8 +10,8 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "employee")
-public class Employee implements UserDetails {
+@Table(name = "user")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,13 @@ public class Employee implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "employee_authority",
-            joinColumns = @JoinColumn(name = "employee_id"),
+            name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
     private Set<Role> roles;
 
-    public Employee() {
+    public User() {
     }
 
     public long getId() {
@@ -84,7 +84,4 @@ public class Employee implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-
 }
