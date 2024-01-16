@@ -22,13 +22,13 @@ public class PizzaController {
         return service.getAllInCafe(cafeName, cafeAddress);
     }
 
-    @GetMapping("/{cafeName}/{cafeAddress}/name/{name}")
+    @GetMapping("/name/{cafeName}/{cafeAddress}/{name}")
     public Pizza getPizzaByName(@PathVariable String cafeName,
                                 @PathVariable String cafeAddress, @PathVariable String name) {
         return service.getPizzaByName(cafeName, cafeAddress, name);
     }
 
-    @GetMapping("/{cafeName}/{cafeAddress}/id/{id}")
+    @GetMapping("/id/{cafeName}/{cafeAddress}/{id}")
     public Pizza getPizzaById(@PathVariable String cafeName,
                               @PathVariable String cafeAddress, @PathVariable long id){
         return service.getPizzaById(cafeName, cafeAddress, id);

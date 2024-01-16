@@ -16,16 +16,18 @@ public class CafeController {
     @Autowired
     private CafeService service;
 
-    //Works
+    //Works and tested
     @GetMapping("/all")
     public List<Cafe> getAllCafes() {
         return service.getAllCafes();
     }
 
+    //Works and tested
     @GetMapping("/chain/{name}")
     public List<Cafe> getCafeChain(@PathVariable String name) {
         return service.getCafeChain(name);
     }
+
 
     @GetMapping("/id/{id}")
     public Cafe getCafeById(@PathVariable long id){
