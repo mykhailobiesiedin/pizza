@@ -9,6 +9,7 @@ import com.example.pizza.repository.CafeRepository;
 import com.example.pizza.repository.PizzaRepository;
 import com.example.pizza.service.interfaces.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -114,6 +115,7 @@ public class PizzaServiceImpl implements PizzaService {
      * @param cafeAddress The address of the cafe to which the pizza is to be added.
      * @throws CafeNotFoundException If no cafe is found with the specified name and address.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void addPizza(Pizza pizza, String cafeName, String cafeAddress) {
         Cafe cafe = cafeRepository.findCafeByNameAndAddress(cafeName, cafeAddress);
@@ -142,6 +144,7 @@ public class PizzaServiceImpl implements PizzaService {
      * @throws CafeNotFoundException  If no cafe is found with the specified name and address.
      * @throws PizzaNotFoundException If no pizza is found with the specified ID in the specified cafe.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void updatePizza(Pizza pizza, String cafeName, String cafeAddress) {
         Cafe cafe = cafeRepository.findCafeByNameAndAddress(cafeName, cafeAddress);
@@ -178,6 +181,7 @@ public class PizzaServiceImpl implements PizzaService {
      * @param name        The name of the pizzas to be deleted.
      * @throws CafeNotFoundException If no cafe is found with the specified name and address.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void deleteByName(String cafeName, String cafeAddress, String name) {
         Cafe cafe = cafeRepository.findCafeByNameAndAddress(cafeName, cafeAddress);

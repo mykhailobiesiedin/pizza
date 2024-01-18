@@ -8,6 +8,7 @@ import com.example.pizza.repository.CafeRepository;
 import com.example.pizza.service.interfaces.CafeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -156,6 +157,7 @@ public class CafeServiceImpl implements CafeService {
      * @param cafeId The unique identifier of the cafe to be deleted.
      * @throws EmptyResultDataAccessException If no cafe is found with the specified ID.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void deleteCafeById(long cafeId) {
         try {
@@ -173,6 +175,7 @@ public class CafeServiceImpl implements CafeService {
      *
      * @param name The name of the cafe chain to be deleted.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void deleteCafeChain(String name) {
         cafeRepository.deleteCafesByName(name);
@@ -186,6 +189,7 @@ public class CafeServiceImpl implements CafeService {
      * @param name    The name of the cafe to be deleted.
      * @param address The address of the cafe to be deleted.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void deleteCafeByNameAndAddress(String name, String address) {
         cafeRepository.deleteCafeByNameAndAddress(name, address);
